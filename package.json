@@ -1,0 +1,43 @@
+{
+  "name": "opencode-quota-board",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Provider quotas and balances for OpenCode V2",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gilvex/opencode-quota-board.git"
+  },
+  "homepage": "https://github.com/gilvex/opencode-quota-board#readme",
+  "bugs": "https://github.com/gilvex/opencode-quota-board/issues",
+  "type": "module",
+  "packageManager": "pnpm@10.10.0",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tui": "./src/tui.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:ui": "bun --preload @opentui/solid/preload test/ui-smoke.tsx",
+    "docs:media": "bun --preload @opentui/solid/preload scripts/render-media.jsx"
+  },
+  "dependencies": {
+    "@opencode/client": "2.0.28",
+    "@opencode/plugin": "2.0.28",
+    "zod": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@opentui/core": ">=0.5.8",
+    "@opentui/solid": ">=0.5.8",
+    "solid-js": "1.9.12"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.0.11",
+    "@opencode/theme": "2.0.28",
+    "@types/node": "^24.0.0",
+    "gifenc": "^1.0.3",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.4"
+  }
+}
