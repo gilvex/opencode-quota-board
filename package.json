@@ -1,7 +1,6 @@
 {
   "name": "opencode-quota-board",
   "version": "0.1.0",
-  "private": true,
   "description": "Provider quotas and balances for OpenCode V2",
   "license": "MIT",
   "repository": {
@@ -12,6 +11,16 @@
   "bugs": "https://github.com/gilvex/opencode-quota-board/issues",
   "type": "module",
   "packageManager": "pnpm@10.10.0",
+  "files": [
+    "src/",
+    "index.ts",
+    "tui.tsx"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": ["opencode", "opencode-plugin", "quota", "usage", "tui"],
   "exports": {
     ".": "./src/index.ts",
     "./tui": "./src/tui.tsx"
@@ -28,8 +37,8 @@
     "zod": "^4.0.0"
   },
   "peerDependencies": {
-    "@opentui/core": ">=0.5.8",
-    "@opentui/solid": ">=0.5.8",
+    "@opentui/core": ">=0.5.17",
+    "@opentui/solid": ">=0.5.17",
     "solid-js": "1.9.12"
   },
   "devDependencies": {

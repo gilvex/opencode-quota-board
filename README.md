@@ -7,12 +7,12 @@
 Provider quotas, reset countdowns, and credit balances — right inside OpenCode.
 
 ![OpenCode V2](https://img.shields.io/badge/OpenCode-V2-95d5a0?style=flat-square&labelColor=131a23)
-![Local preview](https://img.shields.io/badge/status-local_preview-eac17a?style=flat-square&labelColor=131a23)
+![Early release](https://img.shields.io/badge/status-early_release-eac17a?style=flat-square&labelColor=131a23)
 ![pnpm](https://img.shields.io/badge/package_manager-pnpm-8bbaf3?style=flat-square&labelColor=131a23)
 
-[See it in action](#see-it-in-action) · [Install](#install-locally) · [Controls](#controls) · [Providers](#supported-providers)
+[See it in action](#see-it-in-action) · [Install](#install) · [Controls](#controls) · [Providers](#supported-providers)
 
-![Expanded and collapsed Quota Board sidebars, showing 98% remaining, a 6d 8h reset countdown, and a $42.50 Console balance](docs/media/sidebar.png)
+![Expanded and collapsed Quota Board sidebars, showing 98% remaining, a 6d 8h reset countdown, and a $42.50 Console balance](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar.png)
 
 </div>
 
@@ -29,24 +29,43 @@ Provider quotas, reset countdowns, and credit balances — right inside OpenCode
 
 **Expand → collapse → `/quota` → hide a provider → Esc.**
 
-![Animated walkthrough of the actual Quota Board components: quota bars, compact summaries, the quota popup, and provider visibility controls](docs/media/walkthrough.gif)
+![Animated walkthrough of the actual Quota Board components: quota bars, compact summaries, the quota popup, and provider visibility controls](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/walkthrough.gif)
 
 *An 18.5-second looping demo, captured from the plugin's OpenTUI components in a demo host. All balances and quotas are sample data. The surrounding frames and captions are presentation elements.*
 
-Prefer still images? [Sidebar comparison](docs/media/sidebar.png) · [Quota popup](docs/media/quota-modal.png)
+Prefer still images? [Sidebar comparison](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar.png) · [Quota popup](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/quota-modal.png)
 
 <details>
 <summary><strong>A closer look at the quota popup</strong></summary>
 
-![Quota popup showing a weekly OpenAI allowance, its reset countdown, Console credits, and refresh, pin, visibility, and close controls](docs/media/quota-modal.png)
+![Quota popup showing a weekly OpenAI allowance, its reset countdown, Console credits, and refresh, pin, visibility, and close controls](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/quota-modal.png)
 
 Read the provider's individual windows, check its last update, refresh one account, or change what appears in the sidebar. **Esc** returns you to the conversation.
 
 </details>
 
-## Install locally
+## Install
 
-**Local preview · tested with OpenCode 2.0.28 · not published to npm yet.**
+Requires **OpenCode V2**; tested with **2.0.28**.
+
+Add the package to the `plugins` array in **both** global files:
+
+- `~/.config/opencode/opencode.jsonc` — fetches provider allowances on the server.
+- `~/.config/opencode/cli.json` — adds the sidebar, footer, and popup to the terminal.
+
+```json
+{
+  "plugins": ["opencode-quota-board@0.1.0"]
+}
+```
+
+Merge this entry into existing plugin lists. OpenCode installs the package for you. If you use `XDG_CONFIG_HOME`, use its `opencode` configuration directory instead. With a remote server, add the server entry to that machine's configuration.
+
+Run `opencode reload`, restart the TUI, and open `/quota`. Connect providers with `/connect` if needed.
+
+### Install from a local checkout
+
+For development, you can load the source directory directly instead of using the npm package.
 
 You need [OpenCode V2](https://opencode.ai/v2/docs/), [pnpm](https://pnpm.io/installation), and a local copy of this project. [Bun](https://bun.sh/) is also needed for UI tests and media generation.
 
@@ -259,4 +278,4 @@ Root `index.ts` and `tui.tsx` shims support OpenCode's local-directory discovery
 
 ---
 
-Built for **OpenCode V2**, with provider adapters adapted from **opencode-usage-left**. This package remains private during local testing; publication requires the owner's explicit approval.
+Built for **OpenCode V2**, with provider adapters adapted from **opencode-usage-left**. MIT licensed.
