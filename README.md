@@ -7,6 +7,7 @@
 Provider quotas, reset countdowns, and credit balances — right inside OpenCode.
 
 ![OpenCode V2](https://img.shields.io/badge/OpenCode-V2-95d5a0?style=flat-square&labelColor=131a23)
+[![npm version](https://img.shields.io/npm/v/opencode-quota-board?style=flat-square&labelColor=131a23&color=95d5a0)](https://www.npmjs.com/package/opencode-quota-board)
 ![Early release](https://img.shields.io/badge/status-early_release-eac17a?style=flat-square&labelColor=131a23)
 ![pnpm](https://img.shields.io/badge/package_manager-pnpm-8bbaf3?style=flat-square&labelColor=131a23)
 
