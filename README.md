@@ -13,7 +13,7 @@ Provider quotas, reset countdowns, and credit balances — right inside OpenCode
 
 [See it in action](#see-it-in-action) · [Install](#install) · [Controls](#controls) · [Providers](#supported-providers)
 
-![Expanded and collapsed Quota Board sidebars, showing 98% remaining, a 6d 8h reset countdown, and a $42.50 Console balance](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar.png)
+![Real OpenCode sidebar showing an OpenAI quota bar, reset countdown, and Console balance](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar.png)
 
 </div>
 
@@ -28,13 +28,15 @@ Provider quotas, reset countdowns, and credit balances — right inside OpenCode
 
 ## See it in action
 
-**Expand → collapse → `/quota` → hide a provider → Esc.**
+**Collapse/expand → hide/show providers → `/quota` → pin → refresh → close.**
 
-![Animated walkthrough of the actual Quota Board components: quota bars, compact summaries, the quota popup, and provider visibility controls](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/walkthrough.gif)
+![Live screen recording of Quota Board in OpenCode, with mouse clicks through the sidebar, visibility menu, quota popup, pinning, and refresh controls](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/walkthrough.gif)
 
-*An 18.5-second looping demo, captured from the plugin's OpenTUI components in a demo host. All balances and quotas are sample data. The surrounding frames and captions are presentation elements.*
+*A 32-second desktop recording of OpenCode 2.0.28 running in Tabby on Windows, using real connected accounts. Screenshots are cropped from the same recording; the GIF is resized for display. Quota values reflect the time of capture.*
 
-Prefer still images? [Sidebar comparison](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar.png) · [Quota popup](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/quota-modal.png)
+**[Download the MP4 recording](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/walkthrough.mp4)** · [Expanded sidebar](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar.png) · [Collapsed sidebar](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/sidebar-collapsed.png)
+
+### Real terminal screenshots
 
 <details>
 <summary><strong>A closer look at the quota popup</strong></summary>
@@ -42,6 +44,15 @@ Prefer still images? [Sidebar comparison](https://raw.githubusercontent.com/gilv
 ![Quota popup showing a weekly OpenAI allowance, its reset countdown, Console credits, and refresh, pin, visibility, and close controls](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/quota-modal.png)
 
 Read the provider's individual windows, check its last update, refresh one account, or change what appears in the sidebar. **Esc** returns you to the conversation.
+
+</details>
+
+<details>
+<summary><strong>Choose which providers appear in the sidebar</strong></summary>
+
+![Real OpenCode provider visibility menu beside the Quota Board sidebar](https://raw.githubusercontent.com/gilvex/opencode-quota-board/main/docs/media/provider-visibility.png)
+
+Click **…** beside Quota Board, then select a provider to hide or show it.
 
 </details>
 
@@ -68,7 +79,7 @@ Run `opencode reload`, restart the TUI, and open `/quota`. Connect providers wit
 
 For development, you can load the source directory directly instead of using the npm package.
 
-You need [OpenCode V2](https://opencode.ai/v2/docs/), [pnpm](https://pnpm.io/installation), and a local copy of this project. [Bun](https://bun.sh/) is also needed for UI tests and media generation.
+You need [OpenCode V2](https://opencode.ai/v2/docs/), [pnpm](https://pnpm.io/installation), and a local copy of this project. [Bun](https://bun.sh/) is also needed for UI tests; processing documentation recordings requires FFmpeg.
 
 ### 1. Install dependencies
 
@@ -250,7 +261,7 @@ The UI smoke test uses **Bun and the real OpenTUI renderer**, including mouse in
 pnpm docs:media
 ```
 
-This renders the current plugin with deterministic sample data and generates the README's two PNGs and animated GIF. It uses no provider connections. See [the media guide](docs/media/README.md) for font setup and capture details.
+With FFmpeg installed, this extracts four screenshots and encodes the GIF from the checked-in **real desktop recording** (`docs/media/walkthrough.mp4`). It doesn't generate or simulate UI. See [the media guide](docs/media/README.md) for capture details and FFmpeg setup.
 
 ### Under the hood
 
@@ -273,7 +284,7 @@ Sidebar · prompt summary · /quota popup
 | [`src/rpc.ts`](src/rpc.ts) | Validated snapshots and events |
 | [`src/tui.tsx`](src/tui.tsx) | Sidebar, footer, popup, commands, preferences |
 | [`src/format.ts`](src/format.ts) | Quota labels, bars, countdowns, summaries |
-| [`scripts/render-media.jsx`](scripts/render-media.jsx) | Reproducible documentation captures |
+| [`scripts/process-recording.mjs`](scripts/process-recording.mjs) | Screenshot extraction and GIF encoding from the live recording |
 
 Root `index.ts` and `tui.tsx` shims support OpenCode's local-directory discovery. The package exports point to the same implementations.
 

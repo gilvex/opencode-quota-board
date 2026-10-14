@@ -1,34 +1,49 @@
-# README media
+# Real terminal captures
 
-These assets show the **actual Quota Board components rendered by OpenTUI**, using a deterministic demo host and sample data. They are not screenshots of a live connected OpenCode session. Terminal frames and chapter captions are added for presentation.
+These assets come from an **actual desktop screen recording** of OpenCode 2.0.28 in Tabby on Windows, captured on October 14, 2026. They replace the earlier fixture-rendered demo.
+
+The recording uses real active OpenAI and OpenCode Console connections in a separate `Quota-Board-Demo` session. Its quotas and balances are historical readings from the time of capture. The theme, font, dialogs, and mouse pointer are the ones rendered on screen.
 
 | Asset | Content |
 | --- | --- |
-| `sidebar.png` | Expanded and collapsed sidebar comparison |
-| `quota-modal.png` | `/quota` popup with percentage and credit cards |
-| `walkthrough.gif` | 18.5-second loop: expanded → collapsed → popup → hide provider → close |
+| `walkthrough.mp4` | Original 32-second viewport recording, H.264, 1518×1272, 12 fps, no audio |
+| `walkthrough.gif` | Looping version at 1280 pixels wide and 10 fps |
+| `sidebar.png` | Expanded quota bar and collapsed Console balance |
+| `sidebar-collapsed.png` | Compact percentage/countdown and credit summaries |
+| `provider-visibility.png` | The actual provider hide/show selection dialog |
+| `quota-modal.png` | The actual `/quota` popup |
 
-## Regenerate
+## What the recording demonstrates
 
-From the project root, with pnpm dependencies installed and Bun available:
+- Collapse and expand OpenAI's quota details.
+- Open **…**, hide Console, and show it again.
+- Type `/quota` and open the popup.
+- Pin and unpin OpenAI.
+- Refresh OpenAI's allowance.
+- Hide and show OpenAI from its popup card.
+- Close the popup and return to a compact sidebar.
+
+The mouse clicks and keystrokes were automated against the real terminal window while FFmpeg recorded desktop pixels, including the cursor. The temporary terminal tab was closed afterward, the original window size restored, and the original quota preferences restored. No fixture host or redrawn terminal text is used in these assets.
+
+## Reprocess the recording
+
+Install FFmpeg and run from the project root:
 
 ```sh
 pnpm docs:media
 ```
 
-The script imports `src/tui.tsx`, supplies fixture RPC data, invokes the registered `/quota` command, and clicks the real rendered controls. It captures OpenTUI's text/color cells and uses `@napi-rs/canvas` and `gifenc` to create PNG/GIF assets. Assertions check the key states before output is written. No live account data or credentials are used.
-
-The script looks for Cascadia Mono on Windows, DejaVu Sans Mono on Linux, or Menlo on macOS. You can specify a monospace font explicitly:
+If FFmpeg isn't on `PATH`, specify its executable:
 
 ```powershell
-$env:QUOTA_DOCS_FONT = 'C:\path\to\YourMonoFont.ttf'
+$env:FFMPEG_PATH = 'C:\tools\ffmpeg\bin\ffmpeg.exe'
 pnpm docs:media
 ```
 
 ```sh
-QUOTA_DOCS_FONT=/path/to/YourMonoFont.ttf pnpm docs:media
+FFMPEG_PATH=/path/to/ffmpeg pnpm docs:media
 ```
 
-Segoe UI Symbol supplies extra glyphs when available on Windows. Output can vary slightly with the selected font and platform.
+`scripts/process-recording.mjs` extracts stills at 1, 7, 16, and 30 seconds, crops them to the relevant UI, and makes a palette-optimized GIF. The MP4 keeps the full captured OpenCode viewport and includes typing `/quota`. Processing never alters the displayed values or replaces UI elements.
 
-Edit the sample accounts and chapter captions in `scripts/render-media.jsx` to change the walkthrough. Keep the sample-data caption visible and inspect both PNGs after regenerating. The still images provide an alternative to the looping animation.
+For a new recording, capture a separate real OpenCode session, replace the MP4, and adjust the extraction timestamps and crop rectangles to match the new viewport. Inspect the resulting stills and animation before publishing. Download the MP4 for native video uploads to Reddit or X, or use the PNGs for a motion-free preview.

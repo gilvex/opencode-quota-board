@@ -20,7 +20,13 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "keywords": ["opencode", "opencode-plugin", "quota", "usage", "tui"],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "quota",
+    "usage",
+    "tui"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./tui": "./src/tui.tsx"
@@ -29,7 +35,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:ui": "bun --preload @opentui/solid/preload test/ui-smoke.tsx",
-    "docs:media": "bun --preload @opentui/solid/preload scripts/render-media.jsx"
+    "docs:media": "node scripts/process-recording.mjs"
   },
   "dependencies": {
     "@opencode/client": "2.0.28",
@@ -42,10 +48,8 @@
     "solid-js": "1.9.12"
   },
   "devDependencies": {
-    "@napi-rs/canvas": "^1.0.11",
     "@opencode/theme": "2.0.28",
     "@types/node": "^24.0.0",
-    "gifenc": "^1.0.3",
     "typescript": "^5.9.0",
     "vitest": "^3.2.4"
   }
